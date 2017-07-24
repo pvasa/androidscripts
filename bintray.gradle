@@ -33,7 +33,7 @@ def bintrayUser = ""
 def bintrayApiKey = ""
 def bintrayGpgPassword = ""
 
-def secureProperties = new File("${project.rootDir}/local.properties")
+def secureProperties = new File("${project.rootDir}/secure.properties")
 if (secureProperties.exists()) {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('secure.properties').newDataInputStream())
