@@ -1,6 +1,27 @@
 apply plugin: 'com.jfrog.bintray'
 
 version = libraryVersion
+bintrayUser = ""
+bintrayApiKey = ""
+bintrayGpgPassword = ""
+
+secureProperties = new File("${project.rootDir}/secure.properties")
+
+if (secureProperties.exists()) {
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('secure.properties').newDataInputStream())
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayApiKey = properties.getProperty("bintray.apikey")
+    bintrayGpgPassword = properties.getProperty("bintray.gpg.password")
+    
+} else {
+
+    bintrayUser = System.getenv("BINTRAY_USER")
+    bintrayApiKey = System.getenv("BINTRAY_APIKEY")
+    bintrayGpgPassword = System.getenv("BINTRAY_GPG_PASSWORD")
+    
+}
 
 if (project.hasProperty("android")) { // Android libraries
     task sourcesJar(type: Jar) {
