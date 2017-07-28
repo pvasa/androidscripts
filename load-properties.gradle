@@ -1,16 +1,15 @@
 File secureProperties = new File("${project.rootDir}/secure.properties")
 
-File keystoreLocal = new File(System.properties['user.home'], 'Android/keystore.jks')
-def path = "/"
+def keystoreLocal = System.properties['user.home'] + 'Android'
+def keystoreCI = "/"
 try {
-    path = System.getenv("HOME") + "/" + System.getenv("CIRCLE_PROJECT_REPONAME")
+    keystoreCI = System.getenv("HOME") + '/' + System.getenv("CIRCLE_PROJECT_REPONAME")
 } catch(Exception e) {}
-File keystoreCI = new File(path, 'keystore.jks')
 
-if (keystoreLocal.exists()) {
-    ext.storeFile = keystoreLocal
-} else if (keystoreCI.exists()) {
-    ext.storeFile = keystoreCI
+if (new File(keystoreLocal, 'keystore.jks').exists()) {
+    ext.storeFilePath = keystoreLocal
+} else if (new File(keystoreCI, 'keystore.jks').exists()) {
+    ext.storeFilePath = keystoreCI
 }
 
 if (secureProperties.exists()) {
