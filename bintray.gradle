@@ -34,17 +34,25 @@ bintray {
     key = bintrayApiKey
 
     configurations = ['archives']
+    
+    dryRun = false
+    publish = true
+    override = true
+    
     pkg {
         repo = bintrayRepo
         name = bintrayName
         desc = libraryDescription
         websiteUrl = siteUrl
+        issueTrackerUrl = gitIssues
         vcsUrl = gitUrl
         licenses = allLicenses
         publish = true
         publicDownloadNumbers = true
+        githubRepo = gitRepo
         version {
             desc = libraryDescription
+            vcsTag = libraryVersion
             gpg {
                 sign = false //Determines whether to GPG sign the files. The default is false
                 passphrase = bintrayGpgPassword
