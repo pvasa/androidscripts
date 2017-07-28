@@ -1,5 +1,14 @@
 File secureProperties = new File("${project.rootDir}/secure.properties")
 
+File keystoreLocal = new File(System.properties['user.home'], 'Android/keystore.jks')
+File keystoreCI = new File(System.getenv("HOME") + "/" + System.getenv("CIRCLE_PROJECT_REPONAME"), keystore.jks")
+
+if (keystoreLocal.exists()) {
+    ext.storeFile = keystoreLocal
+} else if (keystoreCI.exists()) {
+    ext.storeFile = keystoreCI
+}
+
 if (secureProperties.exists()) {
 
     Properties properties = new Properties()
