@@ -1,7 +1,7 @@
 File secureProperties = new File("${project.rootDir}/secure.properties")
 
-keystoreLocal = System.properties['user.home'] + 'Android'
-keystoreCI = "/"
+def keystoreLocal = System.properties['user.home'] + 'Android'
+def keystoreCI = "/"
 try {
     keystoreCI = System.getenv("HOME") + '/' + System.getenv("CIRCLE_PROJECT_REPONAME")
 } catch(Exception e) {}
