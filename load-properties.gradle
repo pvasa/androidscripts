@@ -1,7 +1,7 @@
 def keystoreLocal = "${System.properties['user.home']}/Android"
 def keystoreCI = "/"
 try {
-    keystoreCI = "${System.getenv('HOME')}/${System.getenv('CIRCLE_PROJECT_REPONAME')}"
+    keystoreCI = "${System.getenv('HOME')}/code"
 } catch(Exception ignored) {}
 
 if (file("${keystoreLocal}/keystore.jks").exists()) {
