@@ -1,12 +1,12 @@
-def keystoreLocal = System.properties['user.home'] + '/Android'
-def keystoreCI = '/'
+def keystoreLocal = "${System.properties['user.home']}/Android"
+def keystoreCI = "/"
 try {
-    keystoreCI = System.getenv("HOME") + '/' + System.getenv("CIRCLE_PROJECT_REPONAME")
-} catch(Exception e) {}
+    keystoreCI = "${System.getenv(\"HOME\")}/${System.getenv(\"CIRCLE_PROJECT_REPONAME\")}
+} catch(Exception ignored) {}
 
-if (new File(keystoreLocal, 'keystore.jks').exists()) {
+if (file("${keystoreLocal}/keystore.jks").exists()) {
     ext.storeFilePath = keystoreLocal
-} else if (new File(keystoreCI, 'keystore.jks').exists()) {
+} else if (file("${keystoreCI}/keystore.jks").exists()) {
     ext.storeFilePath = keystoreCI
 }
 
